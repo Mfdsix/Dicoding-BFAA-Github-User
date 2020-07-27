@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Github User</string>
+    <string name="setting">Setting</string>
+    <string name="search_github_user">Search Github User</string>
+    <string name="search">Search</string>
+    <string name="user_id">User ID</string>
+    <string name="user_node">User Node</string>
+</resources>
