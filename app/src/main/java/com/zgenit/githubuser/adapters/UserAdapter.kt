@@ -12,6 +12,7 @@ import kotlinx.android.synthetic.main.user_items.view.*
 class UserAdapter: RecyclerView.Adapter<UserAdapter.ViewHolder>(){
 
     private val mData = ArrayList<UserItems>()
+    private var onItemClickCallback: OnItemClickCallback? = null
 
     fun setData(items: ArrayList<UserItems>) {
         mData.clear()
@@ -36,9 +37,10 @@ class UserAdapter: RecyclerView.Adapter<UserAdapter.ViewHolder>(){
         holder.userNode.text = user.nodeId
         Glide.with(holder.itemView.context)
             .load(user.avatar)
+            .placeholder(R.color.colorGrey)
             .into(holder.avatar)
 
-        holder.wrap.setOnClickListener {  }
+        holder.wrap.setOnClickListener { onItemClickCallback?.onItemClicked(user) }
     }
 
     inner class ViewHolder(view: View): RecyclerView.ViewHolder(view) {
@@ -47,6 +49,14 @@ class UserAdapter: RecyclerView.Adapter<UserAdapter.ViewHolder>(){
         val avatar = view.img_user
         val userId = view.txt_user_id
         val userNode = view.txt_user_node
+    }
+
+    fun setOnItemClickCallback(onItemClickCallback: OnItemClickCallback) {
+        this.onItemClickCallback = onItemClickCallback
+    }
+
+    interface OnItemClickCallback {
+        fun onItemClicked(data: UserItems)
     }
 
 }

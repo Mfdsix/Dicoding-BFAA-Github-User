@@ -2,6 +2,7 @@ package com.zgenit.githubuser
 
 import android.app.SearchManager
 import android.content.Context
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
@@ -12,6 +13,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.zgenit.githubuser.adapters.UserAdapter
+import com.zgenit.githubuser.models.UserItems
 import com.zgenit.githubuser.view_models.MainViewModel
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.include_notification.*
@@ -27,6 +29,11 @@ class MainActivity : AppCompatActivity() {
 
         adapter = UserAdapter()
         adapter.notifyDataSetChanged()
+        adapter.setOnItemClickCallback(object : UserAdapter.OnItemClickCallback{
+            override fun onItemClicked(data: UserItems) {
+                showUserProfile(data)
+            }
+        })
         rv_users.layoutManager = LinearLayoutManager(this)
         rv_users.adapter = adapter
 
@@ -43,6 +50,12 @@ class MainActivity : AppCompatActivity() {
                 setViewVisibilities(2)
             }
         })
+    }
+
+    private fun showUserProfile(data: UserItems) {
+        val intent = Intent(this, ProfileActivity::class.java)
+        intent.putExtra("username", data.username)
+        startActivity(intent)
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {

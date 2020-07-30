@@ -2,8 +2,8 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    android:layout_height="wrap_content"
+    tools:context=".fragments.FollowingFragment">
 
     <ProgressBar
         android:id="@+id/progressBar"
@@ -19,11 +19,10 @@
         layout="@layout/include_notification"/>
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_users"
-        tools:listitem="@layout/user_items"
-        android:visibility="gone"
         android:layout_width="match_parent"
+        android:visibility="gone"
         android:layout_height="match_parent"
-        android:layout_marginTop="1dp" />
+        tools:listitem="@layout/user_items"
+        android:id="@+id/rv_followings"/>
 
 </RelativeLayout>
