@@ -24,4 +24,8 @@
 
     <string name="user_office">User Office</string>
     <string name="user_location">User Location</string>
+    <string name="no_username_available">No Username Available</string>
+    <string name="no_fullname_available">No Fullname Available</string>
+    <string name="no_office_available">No Office Available</string>
+    <string name="no_location_available">No Location Available</string>
 </resources>

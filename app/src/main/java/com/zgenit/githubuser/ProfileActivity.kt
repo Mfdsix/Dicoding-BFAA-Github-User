@@ -54,13 +54,13 @@ class ProfileActivity : AppCompatActivity() {
             .placeholder(R.color.colorGrey)
             .into(img_user)
 
-        txt_user_name.text = userProfile!!.username
-        txt_user_fullname.text = userProfile!!.fullname
+        txt_user_name.text = userProfile?.username?: getStringValue(R.string.no_username_available)
+        txt_user_fullname.text = userProfile?.fullname?: getStringValue(R.string.no_fullname_available)
         txt_followers_amount.text = resources.getString(R.string.user_followers_amount, userProfile!!.followers)
         txt_followings_amount.text = resources.getString(R.string.user_following_amount, userProfile!!.following)
         txt_repositories_amount.text = resources.getString(R.string.user_repository_amount, userProfile!!.publicRepos)
-        txt_user_office.text = userProfile!!.office
-        txt_user_location.text = userProfile!!.location
+        txt_user_office.text = userProfile?.office?: getStringValue(R.string.no_office_available)
+        txt_user_location.text = userProfile?.location?: getStringValue(R.string.no_location_available)
 
         setTabLayout()
     }
@@ -97,5 +97,9 @@ class ProfileActivity : AppCompatActivity() {
     override fun onSupportNavigateUp(): Boolean {
         finish()
         return super.onSupportNavigateUp()
+    }
+
+    private fun getStringValue(resourceId: Int): String{
+        return resources.getString(resourceId)
     }
 }
