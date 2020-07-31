@@ -10,12 +10,14 @@ import com.zgenit.githubuser.fragments.FollowingFragment
 
 class SectionPagerAdapter(private val context: Context, private val username: String, frameManager: FragmentManager): FragmentPagerAdapter(frameManager, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT){
 
-    private val TAB_TITLES = intArrayOf(R.string.tab_follower, R.string.tab_following)
+    companion object{
+        private val TAB_TITLES = intArrayOf(R.string.tab_follower, R.string.tab_following)
+    }
 
     override fun getItem(position: Int): Fragment {
-        var fragment: Fragment? = when(position){
-            0 -> FollowerFragment(username)
-            1 -> FollowingFragment(username)
+        val fragment: Fragment? = when(position){
+            0 -> FollowerFragment.newInstance(username)
+            1 -> FollowingFragment.newInstance(username)
             else -> null
         }
         return fragment as Fragment

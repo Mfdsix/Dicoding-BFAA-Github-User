@@ -5,6 +5,7 @@ import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.provider.Settings
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
@@ -54,7 +55,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun showUserProfile(data: UserItems) {
         val intent = Intent(this, ProfileActivity::class.java)
-        intent.putExtra("username", data.username)
+        intent.putExtra("user", data)
         startActivity(intent)
     }
 
@@ -91,6 +92,8 @@ class MainActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             R.id.nav_setting -> {
+                val intent = Intent(Settings.ACTION_LOCALE_SETTINGS)
+                startActivity(intent)
                 true
             }
             else -> true

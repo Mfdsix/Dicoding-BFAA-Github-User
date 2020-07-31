@@ -17,14 +17,22 @@ import com.zgenit.githubuser.view_models.FollowerFragmentModel
 import kotlinx.android.synthetic.main.fragment_follower.*
 import kotlinx.android.synthetic.main.include_notification.*
 
-class FollowerFragment(username: String) : Fragment() {
+class FollowerFragment : Fragment() {
 
     private var username: String?= ""
     private lateinit var followerFragmentModel: FollowerFragmentModel
     private lateinit var adapter: UserAdapter
 
-    init{
-        this.username = username
+    companion object{
+        private const val ARG_USERNAME = "username"
+
+        fun newInstance(username: String): FollowerFragment{
+            val fragment = FollowerFragment()
+            val bundle = Bundle()
+            bundle.getString(ARG_USERNAME, username)
+            fragment.arguments = bundle
+            return fragment
+        }
     }
 
     override fun onCreateView(
@@ -37,6 +45,7 @@ class FollowerFragment(username: String) : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
         setViewVisibilities(0)
+        username = arguments?.getString(ARG_USERNAME)
         adapter = UserAdapter()
         adapter.notifyDataSetChanged()
         adapter.setOnItemClickCallback(object : UserAdapter.OnItemClickCallback{
@@ -54,7 +63,7 @@ class FollowerFragment(username: String) : Fragment() {
                 adapter.setData(it)
                 setViewVisibilities(1)
             }else{
-                notification_text.setText(R.string.no_user_found)
+                notification_text.setText(R.string.no_followers)
                 setViewVisibilities(2)
             }
         })
@@ -87,7 +96,7 @@ class FollowerFragment(username: String) : Fragment() {
 
     private fun showUserProfile(data: UserItems) {
         val intent = Intent(context, ProfileActivity::class.java)
-        intent.putExtra("username", data.username)
+        intent.putExtra("user", data)
         startActivity(intent)
     }
 }

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Github User</string>
+    <string name="setting">Pengaturan</string>
+    <string name="search_github_user">Cari Pengguna Github</string>
+    <string name="search">Cari</string>
+    <string name="user_id">ID Pengguna</string>
+    <string name="user_node">Node Pengguna</string>
+    <string name="notification_image">Gambar Notifikasi</string>
+
+    <string name="no_user_found">Pengguna Tidak Ditemukan</string>
+    <string name="no_followers">Belum Ada Pengikut</string>
+    <string name="no_following">Tidak Mengikuti Siapapun</string>
+
+    <string name="tab_follower">Pengikut</string>
+    <string name="tab_following">Mengikuti</string>
+    <string name="user_profile">Profil Pengguna</string>
+    <string name="user_repositories">Repositori</string>
+    <string name="user_following">Mengikuti</string>
+    <string name="user_followers">Pengikut</string>
+
+    <string name="user_following_amount">%d mengikuti</string>
+    <string name="user_followers_amount">%d pengikut</string>
+    <string name="user_repository_amount">%d repo</string>
+
+    <string name="user_office">Perusahaan</string>
+    <string name="user_location">Lokasi</string>
+</resources>

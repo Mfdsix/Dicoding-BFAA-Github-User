@@ -9,7 +9,6 @@ import com.loopj.android.http.AsyncHttpResponseHandler
 import com.zgenit.githubuser.models.UserItems
 import cz.msebera.android.httpclient.Header
 import org.json.JSONArray
-import org.json.JSONObject
 
 class FollowerFragmentModel : ViewModel() {
 
@@ -21,10 +20,10 @@ class FollowerFragmentModel : ViewModel() {
     fun setFollowers(query: String) {
         val listItems = ArrayList<UserItems>()
         val url = "${GITHUB_API_URL}${query}/followers"
-        println(url)
 
         val client = AsyncHttpClient()
         client.addHeader("Accept", "application/vnd.github.v3+json")
+        client.addHeader("Authorization", "b84c50b376ec691500f507663cb5dedf3e841656")
         client.addHeader("User-Agent", "request")
         client.get(url, object : AsyncHttpResponseHandler() {
             override fun onSuccess(
@@ -35,21 +34,22 @@ class FollowerFragmentModel : ViewModel() {
                 try {
                     val result = String(responseBody)
                     val responseObject = JSONArray(result)
-                    println(responseObject)
 
                     for (i in 0 until responseObject.length()) {
                         val user = responseObject.getJSONObject(i)
-                        val userItem = UserItems()
-                        userItem.id = user.getInt("id")
-                        userItem.nodeId = user.getString("node_id")
-                        userItem.username = user.getString("login")
-                        userItem.avatar = user.getString("avatar_url")
+                        val userItem = UserItems(
+                            user.getInt("id"),
+                            user.getString("node_id"),
+                            user.getString("login"),
+                            user.getString("avatar_url")
+                        )
 
                         listItems.add(userItem)
                     }
 
                     listFollowers.postValue(listItems)
                 } catch (e: Exception) {
+                    listFollowers.postValue(ArrayList())
                     Log.d("Exception", e.message.toString())
                 }
             }
@@ -60,7 +60,7 @@ class FollowerFragmentModel : ViewModel() {
                 responseBody: ByteArray?,
                 error: Throwable?
             ) {
-                println(statusCode)
+                listFollowers.postValue(ArrayList())
                 Log.d("onFailure", error?.message.toString())
             }
         })

@@ -9,7 +9,6 @@ import com.loopj.android.http.AsyncHttpResponseHandler
 import com.zgenit.githubuser.models.UserItems
 import cz.msebera.android.httpclient.Header
 import org.json.JSONArray
-import org.json.JSONObject
 
 class FollowingFragmentModel : ViewModel() {
 
@@ -24,6 +23,7 @@ class FollowingFragmentModel : ViewModel() {
 
             val client = AsyncHttpClient()
             client.addHeader("Accept", "application/vnd.github.v3+json")
+            client.addHeader("Authorization", "b84c50b376ec691500f507663cb5dedf3e841656")
             client.addHeader("User-Agent", "request")
             client.get(url, object : AsyncHttpResponseHandler() {
                 override fun onSuccess(
@@ -37,17 +37,19 @@ class FollowingFragmentModel : ViewModel() {
 
                         for (i in 0 until responseObject.length()) {
                             val user = responseObject.getJSONObject(i)
-                            val userItem = UserItems()
-                            userItem.id = user.getInt("id")
-                            userItem.nodeId = user.getString("node_id")
-                            userItem.username = user.getString("login")
-                            userItem.avatar = user.getString("avatar_url")
+                            val userItem = UserItems(
+                                user.getInt("id"),
+                                user.getString("node_id"),
+                                user.getString("login"),
+                                user.getString("avatar_url")
+                            )
 
                             listItems.add(userItem)
                         }
 
                         listFollowing.postValue(listItems)
                     } catch (e: Exception) {
+                        listFollowing.postValue(ArrayList())
                         Log.d("Exception", e.message.toString())
                     }
                 }
@@ -58,7 +60,7 @@ class FollowingFragmentModel : ViewModel() {
                     responseBody: ByteArray?,
                     error: Throwable?
                 ) {
-                    println(statusCode)
+                    listFollowing.postValue(ArrayList())
                     Log.d("onFailure", error?.message.toString())
                 }
             })

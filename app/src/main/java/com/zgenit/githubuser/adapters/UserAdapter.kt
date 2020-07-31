@@ -3,10 +3,13 @@ package com.zgenit.githubuser.adapters
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
+import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.zgenit.githubuser.R
 import com.zgenit.githubuser.models.UserItems
+import de.hdodenhof.circleimageview.CircleImageView
 import kotlinx.android.synthetic.main.user_items.view.*
 
 class UserAdapter: RecyclerView.Adapter<UserAdapter.ViewHolder>(){
@@ -44,11 +47,11 @@ class UserAdapter: RecyclerView.Adapter<UserAdapter.ViewHolder>(){
     }
 
     inner class ViewHolder(view: View): RecyclerView.ViewHolder(view) {
-        val wrap = view.user_wrap
-        val username = view.txt_user_name
-        val avatar = view.img_user
-        val userId = view.txt_user_id
-        val userNode = view.txt_user_node
+        val wrap: CardView = view.user_wrap
+        val username: TextView = view.txt_user_name
+        val avatar: CircleImageView = view.img_user
+        val userId: TextView = view.txt_user_id
+        val userNode: TextView = view.txt_user_node
     }
 
     fun setOnItemClickCallback(onItemClickCallback: OnItemClickCallback) {

@@ -8,6 +8,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
 import com.zgenit.githubuser.adapters.SectionPagerAdapter
+import com.zgenit.githubuser.models.UserItems
 import com.zgenit.githubuser.models.UserProfile
 import com.zgenit.githubuser.view_models.ProfileViewModel
 import kotlinx.android.synthetic.main.activity_profile.*
@@ -17,7 +18,7 @@ class ProfileActivity : AppCompatActivity() {
 
     private lateinit var profileViewModel: ProfileViewModel
     private var userProfile: UserProfile ?= null
-    private var username: String = ""
+    private var user: UserItems = UserItems()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,11 +30,11 @@ class ProfileActivity : AppCompatActivity() {
         setViewVisibilities(0)
         val bundle: Bundle? = intent.extras
         if(bundle != null){
-            username = bundle.getString("username")!!
+            user = bundle.getParcelable("user")!!
         }
 
         profileViewModel = ViewModelProvider(this, ViewModelProvider.NewInstanceFactory()).get(ProfileViewModel::class.java)
-        profileViewModel.setUsers(username)
+        profileViewModel.setUsers(user.username!!)
         profileViewModel.getUsers().observe(this, Observer {
             if(it != null){
                 userProfile = it
@@ -55,9 +56,11 @@ class ProfileActivity : AppCompatActivity() {
 
         txt_user_name.text = userProfile!!.username
         txt_user_fullname.text = userProfile!!.fullname
-        txt_followers_amount.text = "${userProfile!!.followers} followers"
-        txt_followings_amount.text = "${userProfile!!.following} following"
-        txt_repositories_amount.text = "${userProfile!!.publicRepos} repo"
+        txt_followers_amount.text = resources.getString(R.string.user_followers_amount, userProfile!!.followers)
+        txt_followings_amount.text = resources.getString(R.string.user_following_amount, userProfile!!.following)
+        txt_repositories_amount.text = resources.getString(R.string.user_repository_amount, userProfile!!.publicRepos)
+        txt_user_office.text = userProfile!!.office
+        txt_user_location.text = userProfile!!.location
 
         setTabLayout()
     }
