@@ -29,7 +29,7 @@ class FollowerFragment : Fragment() {
         fun newInstance(username: String): FollowerFragment{
             val fragment = FollowerFragment()
             val bundle = Bundle()
-            bundle.getString(ARG_USERNAME, username)
+            bundle.putString(ARG_USERNAME, username)
             fragment.arguments = bundle
             return fragment
         }
