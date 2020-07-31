@@ -10,9 +10,9 @@ data class UserProfile(
     var username: String? = null,
     var fullname: String? = null,
     var avatar: String? = null,
-    var publicRepos: Int? = null,
-    var followers: Int? = null,
-    var following: Int? = null,
+    var publicRepos: Int? = 0,
+    var followers: Int? = 0,
+    var following: Int? = 0,
     var office: String? = null,
     var location: String? = null
 ): Parcelable

@@ -54,13 +54,13 @@ class ProfileActivity : AppCompatActivity() {
             .placeholder(R.color.colorGrey)
             .into(img_user)
 
-        txt_user_name.text = userProfile!!.username
-        txt_user_fullname.text = userProfile!!.fullname
+        txt_user_name.text = userProfile?.username
+        txt_user_fullname.text = userProfile?.fullname
         txt_followers_amount.text = resources.getString(R.string.user_followers_amount, userProfile!!.followers)
         txt_followings_amount.text = resources.getString(R.string.user_following_amount, userProfile!!.following)
         txt_repositories_amount.text = resources.getString(R.string.user_repository_amount, userProfile!!.publicRepos)
-        txt_user_office.text = userProfile!!.office
-        txt_user_location.text = userProfile!!.location
+        txt_user_office.text = userProfile?.office
+        txt_user_location.text = userProfile?.location
 
         setTabLayout()
     }
@@ -98,4 +98,5 @@ class ProfileActivity : AppCompatActivity() {
         finish()
         return super.onSupportNavigateUp()
     }
+
 }

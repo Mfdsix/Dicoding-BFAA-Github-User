@@ -23,7 +23,7 @@ class FollowerFragmentModel : ViewModel() {
 
         val client = AsyncHttpClient()
         client.addHeader("Accept", "application/vnd.github.v3+json")
-        client.addHeader("Authorization", "b84c50b376ec691500f507663cb5dedf3e841656")
+        client.addHeader("Authorization", "token b84c50b376ec691500f507663cb5dedf3e841656")
         client.addHeader("User-Agent", "request")
         client.get(url, object : AsyncHttpResponseHandler() {
             override fun onSuccess(

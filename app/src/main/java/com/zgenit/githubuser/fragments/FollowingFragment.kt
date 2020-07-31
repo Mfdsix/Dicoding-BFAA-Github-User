@@ -26,8 +26,8 @@ class FollowingFragment : Fragment() {
     companion object{
         private const val ARG_USERNAME = "username"
 
-        fun newInstance(username: String): FollowerFragment{
-            val fragment = FollowerFragment()
+        fun newInstance(username: String): FollowingFragment{
+            val fragment = FollowingFragment()
             val bundle = Bundle()
             bundle.putString(ARG_USERNAME, username)
             fragment.arguments = bundle
